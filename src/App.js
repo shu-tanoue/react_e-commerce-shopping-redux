@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import Products from "./com";
+import Products from "./components/Products";
 class App extends Component {
   constructor(props) {
     super(props);
