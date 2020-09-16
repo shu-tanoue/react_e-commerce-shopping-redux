@@ -1,40 +1,32 @@
 import React, { Component } from "react";
-import "./App.css";
+import { Provider } from "react-redux";
 import Products from "./components/Products";
+import Filter from "./components/Filter";
+import Basket from "./components/Basket";
+import store from "./store";
+import "./App.css";
+
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      products: [],
-      filterdProducts: []
-    };
-  }
-  componentWillMount() {
-    fetch("http://locathost:8000/products")
-      .then(res => res.json())
-      .then(data =>
-        this.setState({
-          products: data,
-          filerdProducts: data
-        })
-      );
-  }
   render() {
     return (
-      <div className="container">
-        <h1>Ecommerce Shopping Cart Application</h1>
-        <hr />
-        <div className="row">
-          <div className="col-md-8">
-            <Products
-              products={this.state.filterdProducts}
-              handleAddToCart={this.handleAddToCart}
-            />
+      <Provider store={store}>
+        <div className="container">
+          <h1>E-commerce Shopping Cart Application</h1>
+          <hr />
+          <div className="row">
+            <div className="col-md-9">
+              <Filter />
+              <hr />
+              <Products />
+            </div>
+            <div className="col-md-3">
+              <Basket />
+            </div>
           </div>
-          <div className="col-md-4"></div>
         </div>
-      </div>
+      </Provider>
     );
   }
 }
+
 export default App;
